@@ -26,7 +26,7 @@
 	<!--Adverts created by forum members -->
 	<?php if(isset($bannerads)&& !empty($bannerads)):?>
 		<?php foreach($bannerads as $advert): ?>
-			<div class='span-4'><a href="<?= $advert['advertimagelink']?>"><img src="<?= $advert['advertimageloc']?>"/> <?= $thepost["title"]?> </a></div>			</div>
+			<div class='span-4'><a href="<?= $advert['advertimagelink']?>"><img src="<?= $advert['advertimageloc']?>" alt="ad image"/> <?= $thepost["title"]?> </a></div>			</div>
 		<?php endforeach; ?>
 	<?php else: ?>
 		<div>Book this space.</div>

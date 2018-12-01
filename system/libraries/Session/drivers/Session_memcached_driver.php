@@ -309,7 +309,6 @@ class CI_Session_memcached_driver extends CI_Session_driver implements SessionHa
 		{
 			if ($this->_memcached->get($lock_key))
 			{
-				sleep(1);
 				continue;
 			}
 

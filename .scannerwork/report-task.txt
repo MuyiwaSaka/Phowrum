@@ -1,0 +1,7 @@
+organization=muyiwasaka-github
+projectKey=MuyiwaSaka_Phowrum
+serverUrl=https://sonarcloud.io
+serverVersion=7.5.0.19741
+dashboardUrl=https://sonarcloud.io/dashboard?id=MuyiwaSaka_Phowrum
+ceTaskId=AWdoZHaME0T547kq68I1
+ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AWdoZHaME0T547kq68I1

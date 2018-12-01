@@ -773,7 +773,7 @@ class CI_Encryption {
 				),
 				'openssl' => array(
 					'rijndael-128' => 'aes-128',
-					'tripledes' => 'des-ede3',
+					'tripledes' => 'aes-128',
 					'blowfish' => 'bf',
 					'cast-128' => 'cast5',
 					'arcfour' => 'rc4-40',

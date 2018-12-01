@@ -25,14 +25,16 @@ class Forum extends CI_Controller {
 	}
 	public function index()
 	{
-		$container["header"]=$this->load->view("template/header",array("nav"=>"<ul></ul>"),true);
+		$data['nav']="<ul></ul>";
+		/*$container["header"]=$this->load->view("template/header",$data,TRUE);
+		
 		ob_start();
 		$this->load->view("template/footer",true);
 		$container["footer"] = ob_get_clean();
 		//$container["featuredposts"] = [["id"=>456,"title"=>"This is the title","slug" => "This is the slug text"]];
-		/*$container["boardlinks"] = [
-			["boardname"=>"Politics","id"=>787], ["boardname"=>"Sports","id"=>345],["boardname"=>"Programming","id"=>7897]
-			];*/
+		
 		$this->load->view('main',$container );
+		*/
+		$this->load->view("template/header",$data);
 	}
 }

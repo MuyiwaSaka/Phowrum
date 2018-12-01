@@ -59,4 +59,5 @@
 					</li>
 				  </ul>
 				</div>
+				<?php echo nav; ?> 
 		</header>
