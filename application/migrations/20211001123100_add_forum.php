@@ -92,8 +92,8 @@ class Migration_add_forum extends CI_Migration {
 			),
 		));
 		$this->dbforge->add_key("section_id",true);
-		$this->dbforge->create_table("ph_sections", TRUE);
-		$this->db->query('ALTER TABLE  `ph_sections` ENGINE = MyISAM');
+		$this->dbforge->create_table("sections", TRUE);
+		$this->db->query('ALTER TABLE  `sections` ENGINE = MyISAM');
 
 		## Create Table ph_topics
 		$this->dbforge->add_field(array(
@@ -125,8 +125,8 @@ class Migration_add_forum extends CI_Migration {
 			'`modified` timestamp NULL DEFAULT CURRENT_TIMESTAMP ',
 		));
 		$this->dbforge->add_key("topic_id",true);
-		$this->dbforge->create_table("ph_topics", TRUE);
-		$this->db->query('ALTER TABLE  `ph_topics` ENGINE = MyISAM');
+		$this->dbforge->create_table("topics", TRUE);
+		$this->db->query('ALTER TABLE  `topics` ENGINE = MyISAM');
 
 		## Create Table user_autologin
 		$this->dbforge->add_field(array(
@@ -299,10 +299,10 @@ class Migration_add_forum extends CI_Migration {
 		$this->dbforge->drop_table("ci_sessions", TRUE);
 		### Drop table login_attempts ##
 		$this->dbforge->drop_table("login_attempts", TRUE);
-		### Drop table ph_sections ##
-		$this->dbforge->drop_table("ph_sections", TRUE);
-		### Drop table ph_topics ##
-		$this->dbforge->drop_table("ph_topics", TRUE);
+		### Drop table sections ##
+		$this->dbforge->drop_table("sections", TRUE);
+		### Drop table topics ##
+		$this->dbforge->drop_table("topics", TRUE);
 		### Drop table user_autologin ##
 		$this->dbforge->drop_table("user_autologin", TRUE);
 		### Drop table user_profiles ##
