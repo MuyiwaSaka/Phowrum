@@ -80,7 +80,7 @@ $db['default'] = array(
 	'password' => '',
 	'database' => 'phowrum',
 	'dbdriver' => 'mysqli',
-	'dbprefix' => 'ph_',
+	'dbprefix' => '',
 	'pconnect' => FALSE,
 	'db_debug' => (ENVIRONMENT !== 'production'),
 	'cache_on' => FALSE,
