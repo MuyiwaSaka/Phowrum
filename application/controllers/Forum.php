@@ -18,21 +18,23 @@ class Forum extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see http://codeigniter.com/user_guide/general/urls.html
 	 */
-	 
+
 	public function __construct(){
 		parent::__construct();
 		$this->load->helper("url");
+		$this->load->model('Core_model');				
 	}
 	public function index()
 	{
-		$data['nav']="<ul></ul>";
+		$data['nav']="<ul>Hello Hello Hello Oh.</ul>";
+		$data['sections'] = $this->Core_model->get_all_sections();
 		/*$container["header"]=$this->load->view("template/header",$data,TRUE);
-		
+
 		ob_start();
 		$this->load->view("template/footer",true);
 		$container["footer"] = ob_get_clean();
 		//$container["featuredposts"] = [["id"=>456,"title"=>"This is the title","slug" => "This is the slug text"]];
-		
+
 		$this->load->view('main',$container );
 		*/
 		$this->load->view("template/header",$data);
