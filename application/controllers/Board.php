@@ -32,7 +32,6 @@ class Board extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->helper("url");
 		$container["featuredposts"] = [["id"=>456,"title"=>"This is the title","slug" => "This is the slug text"]];
 		$container["boardlinks"] = [
 			["boardname"=>"Politics","id"=>787], ["boardname"=>"Sports","id"=>345],["boardname"=>"Programming","id"=>7897]
