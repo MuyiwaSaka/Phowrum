@@ -53,7 +53,7 @@
   					  <ul class="dropdown-menu">
     						<li><a href="#">Action</a></li>
     						<li><a href="#">Another action</a></li>
-    						<li><a href="#">Something else here</a></li>
+    						<?php if ($this->ion_auth->logged_in() &&($this->ion_auth->is_admin())):?><li><a href="#">This is some admin shit</a></li><?php endif; ?>
     						<li role="separator" class="divider"></li>
     						<li class="dropdown-header">Nav header</li>
     						<li><a href="#">Separated link</a></li>
