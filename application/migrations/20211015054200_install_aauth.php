@@ -19,8 +19,9 @@ class Migration_install_aauth extends CI_Migration{
         $this->dbforge->add_field("`id` int(11) unsigned NOT NULL AUTO_INCREMENT");
         $this->dbforge->add_field("`name` varchar(100)");
         $this->dbforge->add_field("`definition` text");
+        $this->dbforge->add_field("PRIMARY KEY (`id`)");        
 //create table and assign primary key
-        $this->dbforge->add_key('id', TRUE);
+        //$this->dbforge->add_key('id', TRUE);
         $attributes = array('ENGINE'=>'InnoDB','CHARSET'=>'utf8','AUTO_INCREMENT'=>'4');        
         $this->dbforge->create_table('aauth_groups',FALSE, $attributes);
 
@@ -30,10 +31,10 @@ class Migration_install_aauth extends CI_Migration{
                 'id'=> 1,  'name'=>'Admin',  'definition'=>'Super Admin Group'
             ],
             [
-                'id'=> 1,   'name'=>'Moderators',   'definition'=>'MOderator Access Group'
+                'id'=> 2,   'name'=>'Moderators',   'definition'=>'MOderator Access Group'
             ],
             [
-                'id'=> 1,   'name'=>'Basic',    'definition'=>'Basic Access Group'
+                'id'=> 3,   'name'=>'Basic',    'definition'=>'Basic Access Group'
             ]
         ] ;
 		$this->db->insert_batch('aauth_groups', $data);
@@ -47,7 +48,7 @@ class Migration_install_aauth extends CI_Migration{
         $this->dbforge->add_field("`name` varchar(100)");
         $this->dbforge->add_field("`definition` text");
         //create table and assign primary key
-        $this->dbforge->add_key('id',TRUE);
+        $this->dbforge->add_field("PRIMARY KEY (`id`)");        
         $attributes = array('ENGINE'=>'InnoDB','CHARSET'=>'utf8');        
         $this->dbforge->create_table('aauth_perms',FALSE, $attributes);
 
@@ -60,7 +61,7 @@ class Migration_install_aauth extends CI_Migration{
             $this->dbforge->add_field("`perm_id` int(11) unsigned NOT NULL");
             $this->dbforge->add_field("`group_id` int(11) unsigned NOT NULL");
         //create table 
-        $this->dbforge->add_key(array('perm_id','group_id'),TRUE);
+        $this->dbforge->add_field("PRIMARY KEY (`perm_id`,`group_id`)");        
         $attributes = array('ENGINE'=>'InnoDB','CHARSET'=>'utf8');        
         $this->dbforge->create_table('aauth_perm_to_group',FALSE, $attributes);
 
@@ -70,8 +71,10 @@ class Migration_install_aauth extends CI_Migration{
         //Delete table perm to group if it exists. 
         $this->dbforge->drop_table('aauth_perm_to_user', TRUE);
         $this->dbforge->add_field("`user_id` int(11) unsigned NOT NULL");
+        $this->dbforge->add_field("`perm_id` int(11) unsigned NOT NULL");
+    
         //create table 
-        $this->dbforge->add_key(array('perm_id','user_id'), TRUE);
+        $this->dbforge->add_field("PRIMARY KEY (`perm_id`,`user_id`)");        
         $attributes = array('ENGINE'=>'InnoDB','CHARSET'=>'utf8');        
         $this->dbforge->create_table('aauth_perm_to_user',FALSE, $attributes);
 
@@ -92,8 +95,8 @@ class Migration_install_aauth extends CI_Migration{
           $this->dbforge->add_field("`pm_deleted_receiver` int(1) DEFAULT NULL");
 
           //create table and assign primary key
-          $this->dbforge->add_key('id',TRUE);
-          $this->dbforge->add_key(['full_index'=>['id','sender_id','receiver_id','date_read']]);
+          $this->dbforge->add_field("PRIMARY KEY (`id`)");      
+          $this->dbforge->add_field("KEY `full_index` (`id`,`sender_id`,`receiver_id`,`date_read`)");                    
           $this->dbforge->create_table('aauth_pms');
 //===========================
 //          USERS TABLE
@@ -116,30 +119,25 @@ class Migration_install_aauth extends CI_Migration{
         $this->dbforge->add_field("`ip_address` text COLLATE utf8_general_ci");
 
         //create table and assign primary key
-        $this->dbforge->add_key('id');
+        $this->dbforge->add_field("PRIMARY KEY (`id`)");        
         $attributes = array(  'ENGINE' => 'InnoDB',   'AUTO_INCREMENT' => 2  );
         $this->dbforge->create_table('aauth_users',FALSE,$attributes);
 
+        $data= array('email'=>'admin@example.com', 
+        'pass' => '$2y$10$h19Lblcr6amOIUL1TgYW2.VVZOhac/e1kHMgAwCubMTlYXZrL0wS2', 
+        'username' => 'Admin',
+        'banned' => '0',
+         'last_login' =>null, 
+         'last_activity' => null, 
+         'date_created' => null, 
+         'forgot_exp' => null,
+         'remember_time'=> null, 
+         'remember_exp' =>  null, 
+         'verification_code' => null,
+         'totp_secret' =>  null,
+         'ip_address' => '0' );
         //Seed the db with original user.
-        $this->db->insert_batch([
-            
-            [
-            'id'=>'1', 
-              'email'=>'admin@example.com', 
-              'pass' => '$2y$10$h19Lblcr6amOIUL1TgYW2.VVZOhac/e1kHMgAwCubMTlYXZrL0wS2', 
-              'username' => 'Admin',
-              'banned' => '0',
-               'last_login' =>null, 
-               'last_activity' => null, 
-               'date_created' => null, 
-               'forgot_exp' => null,
-               'remember_time'=> null, 
-               'remember_exp' =>  null, 
-               'verification_code' => null,
-               'totp_secret' =>  null,
-               'ip_address' => '0'  
-          ]
-        ]);
+        $this->db->insert('aauth_users',$data);
 //===========================
 //          USER GROUP
 //===========================
@@ -148,11 +146,11 @@ class Migration_install_aauth extends CI_Migration{
           $this->dbforge->add_field("`user_id` int(11) unsigned NOT NULL");
           $this->dbforge->add_field("`group_id` int(11) unsigned NOT NULL");
             //create table and assign primary key
-          $this->dbforge->add_key(array('user_id','group_id'),TRUE);
+          $this->dbforge->add_field("PRIMARY KEY (`user_id`,`group_id`)");        
           $this->dbforge->create_table('aauth_user_to_group');
 
             //Seed the db with original user.
-            $this->db->insert_batch([                
+            $this->db->insert_batch('aauth_user_to_group',[                
                [      'user_id' => '1',    'group_id' =>'3'              ],
                [      'user_id' => '1',      'group_id' =>'1'            ],
             ]);
@@ -167,7 +165,7 @@ class Migration_install_aauth extends CI_Migration{
         $this->dbforge->add_field("`data_key` varchar(100) NOT NULL");
         $this->dbforge->add_field("`value` text");
         //create table and assign primary key
-        $this->dbforge->add_key('user_id', TRUE);
+        $this->dbforge->add_field("PRIMARY KEY (`id`),  KEY `user_id_index` (`user_id`)");        
         $this->dbforge->create_table('aauth_user_variables');
 
 //===========================
@@ -178,7 +176,7 @@ class Migration_install_aauth extends CI_Migration{
           $this->dbforge->add_field("`group_id` int(11) unsigned NOT NULL");
           $this->dbforge->add_field("`subgroup_id` int(11) unsigned NOT NULL");
         //create table and assign primary key
-          $this->dbforge->add_key(array('group_id','subgroup_id'));
+          $this->dbforge->add_field("PRIMARY KEY (`group_id`,`subgroup_id`)");        
           $attributes = array('ENGINE'=>'InnoDB','CHARSET'=>'utf8');
           $this->dbforge->create_table('aauth_group_to_group');
 //===========================
@@ -191,7 +189,7 @@ class Migration_install_aauth extends CI_Migration{
         $this->dbforge->add_field("`timestamp` datetime DEFAULT NULL");
         $this->dbforge->add_field("`login_attempts` tinyint(2) DEFAULT '0'");
         //create table and assign primary key
-        $this->dbforge->add_key('id', TRUE);
+        $this->dbforge->add_field("PRIMARY KEY (`id`)");        
         $attributes = array('ENGINE'=>'InnoDB','CHARSET'=>'latin1');
         $this->dbforge->create_table('aauth_login_attempts');
     }
