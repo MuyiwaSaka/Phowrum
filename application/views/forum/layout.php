@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="/images/favicon.ico">
 
-    <title>Sticky Footer Navbar Template for Bootstrap</title>
+    <title><?= $title ?></title>
 
     <!-- Bootstrap core CSS -->
     <link href="<?=base_url("assets/css/bootstrap.min.css"); ?>" rel="stylesheet">
@@ -22,6 +22,78 @@
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
     <script src="/assets/js/ie-emulation-modes-warning.js"></script>
 
+    <style>
+        footer {
+        text-align: center;
+        padding: 3px;
+        color: white;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: auto; /* Set the fixed height of the footer here */
+        background-color: black;
+        }
+
+        footer .col {
+            width: 190px;
+            height: auto;
+            float: left;
+            box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            padding: 0px 20px 20px 20px;
+        }
+
+        footer .col h1{
+            margin: 0;
+            padding: 0;
+            font-family: inherit;
+            font-size: 12px;
+            line-height: 17px;
+            padding: 20px 0px 5px 0px;
+            color: rgba(255,255,255,0.2);
+            font-weight: normal;
+            text-transform: uppercase;
+            letter-spacing: 0.250em;
+        }
+        footer .col ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+        footer .col ul li {
+            color: #999999;
+            font-size: 14px;
+            font-family: inherit;
+            font-weight: bold;
+            padding: 5px 0px 5px 0px;
+            cursor: pointer;
+            transition: .2s;
+            -webkit-transition: .2s;
+            -moz-transition: .2s;
+        }
+
+        footer .col ul a {
+            color: #999999;
+        }
+        footer .col ul li:hover {
+        color: #ffffff;
+        transition: .1s;
+        -webkit-transition: .1s;
+        -moz-transition: .1s;
+        }
+
+        footer .col ul a:hover {
+            color: #ffffff;
+        transition: .1s;
+        -webkit-transition: .1s;
+        -moz-transition: .1s;
+        }
+
+        #page{
+            padding-top:50px;
+        }
+</style>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -62,10 +134,11 @@
   					</li>
 				  </ul>
 				</div>
-				<?php echo $nav; ?>
-
-
-
-		</header>
-
+        </header>
+    <div id='page' class='container'>    
+        <?= $content; ?>
+    </div>
+    <footer>
+        <?= $footer ?>
+    </footer>    
     <script  src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
